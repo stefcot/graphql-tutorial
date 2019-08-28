@@ -1,0 +1,23 @@
+.hdr-cmp {
+  background-color: $black;
+  color: $white;
+  padding: 10px 0;
+
+  &__logo {
+    mask-image: url('~@/assets/logo.svg');
+    display: inline-block;
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    background-color: $white;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-family: $open-sans;
+    font-weight: 400;
+  }
+}
