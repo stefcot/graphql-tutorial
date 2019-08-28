@@ -3,20 +3,27 @@
     id="app"
     class="app"
   >
-    <div class="hdr-cmp">
+    <header class="hdr-cmp">
       <div class="hdr-cmp__logo" />
       <h2 class="hdr-cmp__title">
         Welcome to Apollo
       </h2>
-    </div>
+    </header>
+    <main>
+      <channel-list />
+    </main>
   </div>
 </template>
 
 <script>
+import ChannelList from 'molecules/ChannelList';
 import logo from '../assets/logo.svg';
 
 export default {
   name: 'App',
+  components: {
+    ChannelList,
+  },
   data() {
     return {
       logo,

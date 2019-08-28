@@ -1,6 +1,6 @@
 {
   "name": "How To GraphQL Schema",
-  "schemaPath": "./graphql/schema.js",
+  "schemaPath": "api/src/schema.js",
   "extensions": {
     "endpoints": {
       "Default GraphQL Endpoint": {

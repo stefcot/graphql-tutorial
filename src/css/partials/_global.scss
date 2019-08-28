@@ -1,0 +1,15 @@
+body {
+  background-color: $dark-blue;
+  font-family: $open-sans;
+  color: $white;
+  font-size: 62.5%;
+}
+
+main {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+}
