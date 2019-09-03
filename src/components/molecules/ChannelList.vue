@@ -38,10 +38,6 @@ export default {
         // return ChannelAdapter.fromServer(data): use of addapter to transform the object in a ad hoc schema
         return data.channels;
       },
-      fetchPolicy: 'network-only', // fetches data every 10 seconds, must be set this way instead of 'cache and network'
-      pollInterval() {
-        return this.shouldPoll ? 10000 : null; // Interval, every 10 seconds
-      },
     },
   },
 };
@@ -83,4 +79,5 @@ export default {
     }
   }
 }
+
 </style>
