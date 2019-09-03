@@ -1,22 +1,30 @@
 <template>
-  <ul>
-    <li v-for="channel in channelList" :key="channel.id">{{ channel.name }}</li>
-  </ul>
+  <div class="channels-list-cmp">
+    <add-channel></add-channel>
+    <div v-for="channel in channelList" :key="channel.id" class="channels-list-cmp__list-item">
+      {{ channel.name }}
+    </div>
+  </div>
 </template>
 
 <script>
-import ChannelListQuery from '@/graphql/ChannelListQuery.graphql';
+import CHANNEL_LIST_QUERY from '@/graphql/ChannelListQuery.graphql';
+import AddChannel from '@/components/molecules/AddChannel';
 
 export default {
   name: 'ChannelList',
+  components: {
+    'add-channel': AddChannel,
+  },
   data() {
     return {
       channelList: null,
+      shouldPoll: true,
     };
   },
   apollo: {
     channelList: {
-      query: ChannelListQuery,
+      query: CHANNEL_LIST_QUERY,
       result({ data, loading, networkStatus }) {
         console.log('apollo.queries.channelList - data: ', data);
         console.log('apollo.queries.channelList - loading: ', loading);
@@ -30,39 +38,49 @@ export default {
         // return ChannelAdapter.fromServer(data): use of addapter to transform the object in a ad hoc schema
         return data.channels;
       },
+      fetchPolicy: 'network-only', // fetches data every 10 seconds, must be set this way instead of 'cache and network'
+      pollInterval() {
+        return this.shouldPoll ? 10000 : null; // Interval, every 10 seconds
+      },
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
-ul {
-  list-style: none;
+.channels-list-cmp {
   min-width: 150px;
   max-width: 300px;
   flex: 0 1;
   margin: 0;
   padding: 0;
-}
 
-li {
-  font-family: $open-sans;
-  font-size: 1.4rem;
-  line-height: 1.2;
-  padding: 4px 0;
-  color: $white;
-  border-top: 1px solid $white;
+  &__list-item {
+    @extend %menu-list-item;
+    color: $white;
+    position: relative;
 
-  &:last-of-type {
-    border-bottom: 1px solid $white;
+    &:last-of-type {
+      border-bottom: 1px solid $white;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $white;
+      mask-image: url("~@/assets/chat.svg");
+      display: inline-block;
+      mask-size: contain;
+      mask-position: center;
+      mask-repeat: no-repeat;
+      width: 1.8rem;
+      height: 1.8rem;
+      margin: 0;
+      z-index: 2;
+    }
   }
 }
-
-p {
-  font-family: $open-sans;
-  font-size: 1.4rem;
-  line-height: 1.2;
-}
-
 </style>
