@@ -1,6 +1,7 @@
 <template>
   <div class="addchannel-cmp">
     <input type="text" placeholder="New channel" @keyup="onKeyUp" />
+    <i></i>
   </div>
 </template>
 
@@ -51,6 +52,7 @@ export default {
 
   input {
     @extend %menu-list-item;
+
     position: relative;
     width: 100%;
     box-sizing: border-box;
@@ -60,9 +62,27 @@ export default {
     background-color: transparent;
     color: $grey;
     z-index: 1;
+    transition: color 300ms ease-in;
+
+    &::placeholder {
+      color: $grey;
+      transition: color 300ms ease-in;
+    }
+
+    &:focus {
+      color: $white;
+    }
+
+    &:focus::placeholder {
+      color: $white;
+    }
+
+    &:focus + i {
+      background-color: $white;
+    }
   }
 
-  &::before {
+  i {
     content: '';
     position: absolute;
     left: 18px;
@@ -78,6 +98,7 @@ export default {
     height: 1.4rem;
     margin: 0;
     z-index: 2;
+    transition: background-color 300ms ease-in;
   }
 }
 
