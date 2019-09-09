@@ -10,7 +10,8 @@ Vue.use(VueApollo);
 // Http endpoint
 const httpEndpoint = 'http://localhost:4000/graphql';
 
-const networkInterface = new HttpLink({
+// Instead of network interface
+const httpLink = new HttpLink({
   uri: httpEndpoint,
 });
 
@@ -42,7 +43,7 @@ const defaultOptions = {
 
   // Additional ApolloClient options
   apollo: {
-    link: networkInterface,
+    link: httpLink,
     cache: new InMemoryCache({
       addTypename: false,
     }),

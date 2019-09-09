@@ -21,11 +21,10 @@ export default {
             name: event.target.value,
           },
           update(store, { data: { addChannel } }) {
-            const { id, name } = addChannel;
             // Read the data from our cache for this query.
             const data = store.readQuery({ query: CHANNEL_LIST_QUERY });
-            // Add our tag from the mutation to the end
-            data.channels.push({ id, name });
+            // Add our channel from the mutation to the end
+            data.channels.push(addChannel);
             // Write our data back to the cache.
             store.writeQuery({ query: CHANNEL_LIST_QUERY, data });
           },
@@ -33,7 +32,7 @@ export default {
             __typename: 'Mutation',
             addChannel: {
               __typename: 'Channel',
-              id: -1,
+              id: Math.round(Math.random() * -1000000),
               name: event.target.value,
             },
           },
