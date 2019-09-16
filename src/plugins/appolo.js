@@ -1,12 +1,19 @@
 import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
 // Install the vue plugin
 Vue.use(VueApollo);
 
 // Http endpoint
 const httpEndpoint = 'http://localhost:4000/graphql';
+
+// Instead of network interface
+const httpLink = new HttpLink({
+  uri: httpEndpoint,
+});
 
 // Config
 const defaultOptions = {
@@ -35,7 +42,12 @@ const defaultOptions = {
   // getAuth,
 
   // Additional ApolloClient options
-  // apollo: { ... }
+  apollo: {
+    link: httpLink,
+    cache: new InMemoryCache({
+      addTypename: false,
+    }),
+  },
 
   // Client local data (see apollo-link-state)
   // clientState: { resolvers: { ... }, defaults: { ... } }
