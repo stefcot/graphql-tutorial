@@ -1,7 +1,6 @@
 <template>
   <ul>
-    <li>Channel 1</li>
-    <li>Channel 2</li>
+    <li v-for="channel in channelList" :key="channel.id">{{ channel.name }}</li>
   </ul>
 </template>
 
@@ -18,7 +17,6 @@ export default {
   apollo: {
     channelList: {
       query: ChannelListQuery,
-      manual: true,
       result({ data, loading, networkStatus }) {
         console.log('apollo.queries.channelList - data: ', data);
         console.log('apollo.queries.channelList - loading: ', loading);
@@ -26,6 +24,11 @@ export default {
       },
       error(error) {
         console.error('apollo.queries.channelList - error: ', error);
+      },
+      update: (data) => {
+        console.log('apollo.queries.channelList.update - data.channels: ', data.channels);
+        // return ChannelAdapter.fromServer(data): use of addapter to transform the object in a ad hoc schema
+        return data.channels;
       },
     },
   },
@@ -54,6 +57,12 @@ li {
   &:last-of-type {
     border-bottom: 1px solid $white;
   }
+}
+
+p {
+  font-family: $open-sans;
+  font-size: 1.4rem;
+  line-height: 1.2;
 }
 
 </style>
