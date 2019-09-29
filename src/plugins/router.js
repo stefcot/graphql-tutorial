@@ -1,23 +1,24 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '@/components/pages/Home';
 
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
       name: 'home',
-      component: Home,
+      components: {
+        channels: () => import(/* webpackChunkName: "Home" */ '@/components/pages/Home.vue'),
+      },
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '@/components/pages/About.vue'),
+      path: '/channel/:channelId',
+      name: 'channel-detail',
+      components: {
+        channels: () => import(/* webpackChunkName: "ChannelDetailsView" */ '@/components/pages/ChannelDetailsView.vue'),
+      },
     },
   ],
 });

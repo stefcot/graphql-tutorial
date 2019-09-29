@@ -2,7 +2,12 @@
   <div class="channels-list-cmp">
     <add-channel></add-channel>
     <div v-for="channel in channelList" :key="channel.id" class="channels-list-cmp__list-item">
-      {{ channel.name }}
+      <router-link
+        class="channels-list-cmp__list-item-lnk"
+        :to="{ name: 'channel-detail', params: { channelId: channel.id} }"
+      >
+        {{ channel.name }}
+      </router-link>
     </div>
   </div>
 </template>
@@ -12,14 +17,13 @@ import CHANNEL_LIST_QUERY from '@/graphql/ChannelListQuery.graphql';
 import AddChannel from '@/components/molecules/AddChannel';
 
 export default {
-  name: 'ChannelList',
+  name: 'channel-list',
   components: {
     'add-channel': AddChannel,
   },
   data() {
     return {
       channelList: null,
-      shouldPoll: true,
     };
   },
   apollo: {
@@ -77,6 +81,11 @@ export default {
       margin: 0;
       z-index: 2;
     }
+  }
+
+  &__list-item-lnk {
+    color: $white;
+    text-decoration: none;
   }
 }
 

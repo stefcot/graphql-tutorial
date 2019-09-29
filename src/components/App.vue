@@ -9,21 +9,15 @@
         Vue + GraphQL tutorial
       </h2>
     </header>
-    <main>
-      <channel-list />
-    </main>
+    <router-view name="channels"></router-view>
   </div>
 </template>
 
 <script>
-import ChannelList from 'molecules/ChannelList';
 import logo from '../assets/logo.svg';
 
 export default {
   name: 'App',
-  components: {
-    ChannelList,
-  },
   data() {
     return {
       logo,

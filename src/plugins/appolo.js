@@ -2,6 +2,8 @@ import Vue from 'vue';
 import VueApollo from 'vue-apollo';
 import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
 import { HttpLink } from 'apollo-link-http';
+// import { ApolloLink } from 'apollo-link';
+// mport { onError } from 'apollo-link-error';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
 // Install the vue plugin
@@ -14,6 +16,31 @@ const httpEndpoint = 'http://localhost:4000/graphql';
 const httpLink = new HttpLink({
   uri: httpEndpoint,
 });
+
+/*
+const linkError = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    graphQLErrors.map(({ message, locations, path }) => console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`));
+  }
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
+
+function delayLink(operation, forward) {
+  function setDelay() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log('delayLink, passing to next step');
+        console.log('delayLink, operation: ', operation);
+        return resolve(forward(operation));
+      }, 5000);
+    });
+  }
+
+  return setDelay();
+}
+
+const composedLink = ApolloLink.from([delayLink, linkError, httpLink]);
+*/
 
 // Config
 const defaultOptions = {
