@@ -6,7 +6,7 @@
     <header class="hdr-cmp">
       <div class="hdr-cmp__logo" />
       <h2 class="hdr-cmp__title">
-        Welcome to Apollo
+        Vue + GraphQL tutorial
       </h2>
     </header>
     <main>
